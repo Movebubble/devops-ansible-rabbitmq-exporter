@@ -1,0 +1,8 @@
+---
+
+rabbitmq_exporter_version: 0.29.0
+rabbitmq_exporter_tarball_url: "https://github.com/kbudde/rabbitmq_exporter/releases/download/v{{ rabbitmq_exporter_version }}/rabbitmq_exporter-{{ rabbitmq_exporter_version }}.linux-amd64.tar.gz"
+rabbitmq_exporter_parent_dir: "/opt/rabbitmq_exporter"
+rabbitmq_exporter_install_path: "/opt/rabbitmq_exporter/rabbitmq_exporter-{{ rabbitmq_exporter_version }}.linux-amd64"
+rabbitmq_exporter_user: rabbitmq_exporter
+rabbitmq_exporter_group: rabbitmq_exporter

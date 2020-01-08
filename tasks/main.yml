@@ -1,0 +1,44 @@
+---
+
+- name: create rabbitmq_exporter group
+  group:
+    name: "{{ rabbitmq_exporter_group }}"
+    state: present
+
+- name: create rabbitmq_exporter user
+  user:
+    name: "{{ rabbitmq_exporter_user }}"
+    comment: "User to run rabbitmq_exporter"
+    createhome: no
+    shell: /bin/false
+    group: "{{ rabbitmq_exporter_group }}"
+    state: present
+
+- name: create rabbitmq_exporter home directory
+  file:
+    state: directory
+    path:  "{{ rabbitmq_exporter_parent_dir }}"
+    owner: "{{ rabbitmq_exporter_user }}"
+    group: "{{ rabbitmq_exporter_group }}"
+
+- name: download and untar rabbitmq_exporter tarball
+  unarchive:
+    src: "{{ rabbitmq_exporter_tarball_url }}"
+    dest: "{{ rabbitmq_exporter_parent_dir }}"
+    remote_src: yes
+    owner: "{{ rabbitmq_exporter_user }}"
+    group: "{{ rabbitmq_exporter_group }}"
+    creates: "{{ rabbitmq_exporter_install_path }}"
+
+- name: install service file
+  template:
+    src: rabbitmq_exporter.service.j2
+    dest: /etc/systemd/system/rabbitmq_exporter.service
+  notify:
+    - restart rabbitmq_exporter service
+
+- name: start rabbitmq_exporter service
+  systemd:
+    name: rabbitmq_exporter
+    state: started
+    enabled: yes
