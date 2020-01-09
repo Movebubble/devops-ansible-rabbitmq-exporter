@@ -6,3 +6,5 @@ rabbitmq_exporter_parent_dir: "/opt/rabbitmq_exporter"
 rabbitmq_exporter_install_path: "/opt/rabbitmq_exporter/rabbitmq_exporter-{{ rabbitmq_exporter_version }}.linux-amd64"
 rabbitmq_exporter_user: rabbitmq_exporter
 rabbitmq_exporter_group: rabbitmq_exporter
+rabbitmq_exporter_auth_user: guest
+rabbitmq_exporter_auth_password: guest

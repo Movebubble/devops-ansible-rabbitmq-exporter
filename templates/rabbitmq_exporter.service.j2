@@ -7,6 +7,8 @@ After=network-online.target
 User={{ rabbitmq_exporter_user }}
 Group={{ rabbitmq_exporter_group }}
 Type=simple
+Environment="RABBIT_USER={{ rabbitmq_exporter_auth_user }}"
+Environment="RABBIT_PASSWORD={{ rabbitmq_exporter_auth_password }}"
 ExecStart={{ rabbitmq_exporter_install_path }}/rabbitmq_exporter
 
 [Install]
